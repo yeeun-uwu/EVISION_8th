@@ -36,3 +36,25 @@
 
 ## 2. 리버싱 후 key를 얻는 파이썬 프로그램 개발 
 
+1) IDA로 디컴파일한 결과, `if ( checksum == get_target_checksum() )`에서 `get_target_checksum()`이 `return (GLOBAL_HIGH_PART << 8) | GLOBAL_LOW_PART;`로 작동하는 부분임을 확인. 
+
+
+```
+.rdata:0000000140004000 ; const volatile int GLOBAL_HIGH_PART
+.rdata:0000000140004000 GLOBAL_HIGH_PART dd 4                   ; DATA XREF: get_target_checksum+8↑r
+.rdata:0000000140004004                 public GLOBAL_LOW_PART
+.rdata:0000000140004004 ; const volatile int GLOBAL_LOW_PART
+.rdata:0000000140004004 GLOBAL_LOW_PART dd 4Dh                  ; DATA XREF: get_target_checksum+11↑r
+```
+  
+위처럼 메모리 값이 저장된 것을 발견하여, high part가 10진수 4, low part가 16진수 0x4D임을 확인함.
+
+이에 따라 genKey에서 checksum 값을 구하는 부분을 작성함.
+
+2) crackme.exe를 실행해 아무 값이나 입력해 본 결과, 라이선스 키가 길이 16에 대문자와 숫자만 사용됨을 오류 메시지를 통해 확인함. 
+
+3) `gen_valid_key` 함수를 생성하여, 0를 기준으로 전체 문자열을 채운 후 키를 생성하는 코드를 작성함. 
+- 알파벳으로 변환하고 앞에서부터 남은 체크섬을 채우면서 넘어감 
+
+구한 키: ZZLAAAAAAAAAAAAA
+실제로 flag를 얻을 수 있었으며, 결과는 success.png 이미지로 확인 가능 
