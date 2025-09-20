@@ -1,5 +1,10 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+#include "flag.h"
+
+const volatile int GLOBAL_HIGH_PART = 4;
+const volatile int GLOBAL_LOW_PART = 77;
 
 //체크섬 검증 
 int calc_chechsum(const char *key) {
@@ -13,10 +18,16 @@ int calc_chechsum(const char *key) {
 #define KEY_LENGTH 16
 #define BUFFER_SIZE (KEY_LENGTH + 1)
 
+int get_target_checksum(){
+    volatile int high = GLOBAL_HIGH_PART;
+    volatile int low = GLOBAL_LOW_PART;
+
+    return (high << 8) | low;
+}
+
 int main() {
     
     char user_key[BUFFER_SIZE]; // 사용자 키 입력 버퍼
-    const int TARGET_CHECKSUM = 1101; // 목표 체크섬 값
 
     printf("Enter 16-character license key: ");
     if (scanf("%16s", user_key) != 1) {
@@ -38,11 +49,12 @@ int main() {
         }
     }
 
-    int checksum = calculate_checksum(user_key);
+    int checksum = calc_chechsum(user_key);
 
-     if (checksum == TARGET_CHECKSUM) {
-        printf("Success! Welcome.\n");
+     if (checksum == get_target_checksum()) {
+        print_flag(); 
     } else {
+        printf("your checksum: %d\n", checksum);
         printf("License failed: Invalid key.\n");
     }
 
