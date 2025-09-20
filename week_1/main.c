@@ -31,7 +31,7 @@ int main() {
 
     printf("Enter 16-character license key: ");
     if (scanf("%16s", user_key) != 1) {
-        printf("License failed: Key must be 16 characters long.\n");
+        printf("License failed: Input processing error.\n");
         // 길이 넘어가면 입력 실패 처리
         return 0;
     }
@@ -54,7 +54,6 @@ int main() {
      if (checksum == get_target_checksum()) {
         print_flag(); 
     } else {
-        printf("your checksum: %d\n", checksum);
         printf("License failed: Invalid key.\n");
     }
 
