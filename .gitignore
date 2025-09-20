@@ -1,0 +1,15 @@
+# git 관련 파일
+.gitmessage.txt
+
+# ida 분석 파일 
+*.id*
+*.nam*
+*.til
+*.i64
+
+# 임시 목적 파일 및 디버그 심볼
+*.o
+*.obj
+*.out
+*.pdb
+*.ilk
