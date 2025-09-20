@@ -13,6 +13,3 @@
 *.out
 *.pdb
 *.ilk
-
-# VS Code 빌드 관련 폴더
-.vscode/

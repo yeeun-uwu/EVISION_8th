@@ -18,7 +18,7 @@
             },
             "group": {
                 "kind": "build",
-                "isDefault": true // 🚩 이 작업만 기본값으로 설정
+                "isDefault": true 
             },
             "problemMatcher": ["$gcc"]
         },
