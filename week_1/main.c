@@ -7,7 +7,7 @@ const volatile int GLOBAL_HIGH_PART = 4;
 const volatile int GLOBAL_LOW_PART = 77;
 
 //체크섬 검증 
-int calc_chechsum(const char *key) {
+int calc_checksum(const char *key) {
     int sum = 0;
     for (size_t i = 0; i < strlen(key); i++) {
         sum += (int)key[i];
@@ -49,7 +49,7 @@ int main() {
         }
     }
 
-    int checksum = calc_chechsum(user_key);
+    int checksum = calc_checksum(user_key);
 
      if (checksum == get_target_checksum()) {
         print_flag(); 
