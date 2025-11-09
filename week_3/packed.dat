@@ -1,0 +1,120 @@
+{
+    "entry_point_rva": 5088,
+    "entry_point_va": 5368714208,
+    "imports": [
+        {
+            "dll": "KERNEL32.dll",
+            "functions": [
+                "DeleteCriticalSection",
+                "EnterCriticalSection",
+                "GetLastError",
+                "InitializeCriticalSection",
+                "LeaveCriticalSection",
+                "SetUnhandledExceptionFilter",
+                "Sleep",
+                "TlsGetValue",
+                "VirtualProtect",
+                "VirtualQuery"
+            ]
+        },
+        {
+            "dll": "api-ms-win-crt-environment-l1-1-0.dll",
+            "functions": [
+                "__p__environ"
+            ]
+        },
+        {
+            "dll": "api-ms-win-crt-heap-l1-1-0.dll",
+            "functions": [
+                "_set_new_mode",
+                "calloc",
+                "free",
+                "malloc"
+            ]
+        },
+        {
+            "dll": "api-ms-win-crt-math-l1-1-0.dll",
+            "functions": [
+                "__setusermatherr"
+            ]
+        },
+        {
+            "dll": "api-ms-win-crt-private-l1-1-0.dll",
+            "functions": [
+                "__C_specific_handler",
+                "memcpy"
+            ]
+        },
+        {
+            "dll": "api-ms-win-crt-runtime-l1-1-0.dll",
+            "functions": [
+                "__p___argc",
+                "__p___argv",
+                "_cexit",
+                "_configure_narrow_argv",
+                "_crt_atexit",
+                "_exit",
+                "_initialize_narrow_environment",
+                "_initterm",
+                "_set_app_type",
+                "_set_invalid_parameter_handler",
+                "abort",
+                "exit",
+                "signal"
+            ]
+        },
+        {
+            "dll": "api-ms-win-crt-stdio-l1-1-0.dll",
+            "functions": [
+                "__acrt_iob_func",
+                "__p__commode",
+                "__p__fmode",
+                "__stdio_common_vfprintf",
+                "fwrite",
+                "puts"
+            ]
+        },
+        {
+            "dll": "api-ms-win-crt-string-l1-1-0.dll",
+            "functions": [
+                "strlen",
+                "strncmp"
+            ]
+        }
+    ],
+    "strings": [
+        "Overflow range error ",
+        "  VirtualQuery failed for ",
+        " 14.2.0",
+        "section",
+        "p, yielding the value ",
+        "UNDERFLOW",
+        "PLOSS",
+        "  VirtualProtect failed with code 0x",
+        "Argument domain error ",
+        "Address ",
+        "DOMAIN",
+        "s in ",
+        "matherr",
+        "p out of range, targeting ",
+        "w64 runtime failure",
+        "Partial loss of significance ",
+        "Rev2, Built by MSYS2 project",
+        "Argument singularity ",
+        "runtime error ",
+        "OVERFLOW",
+        "Total loss of significance ",
+        "d bytes at address ",
+        "retval",
+        "The result is too small to be represented ",
+        "Hello, World!",
+        "  Unknown pseudo relocation protocol version ",
+        "p has no image",
+        "d bit pseudo relocation at ",
+        "TLOSS",
+        "Mingw",
+        "Unknown error",
+        "  Unknown pseudo relocation bit size "
+    ],
+    "encoded_code": "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"
+}

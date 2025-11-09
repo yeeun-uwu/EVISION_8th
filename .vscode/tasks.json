@@ -8,10 +8,9 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}/week_1/main.c",
-                "${workspaceFolder}/week_1/flag.c", // 여기에 두 파일이 포함되어 있음
+                "${workspaceFolder}/week_3/hello.c",// 여기에 두 파일이 포함되어 있음
                 "-o",
-                "${workspaceFolder}/week_1/crackme.exe"
+                "${workspaceFolder}/week_3/hello.exe"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
