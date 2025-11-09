@@ -28,7 +28,8 @@
 
 ### 👀 선택한 방식
 
-앞뒤로 40바이트의 더미 코드(NOP)를 삽입한 후 zlib을 이용해 코드를 압축하고, base64 인코딩하는 방식으로 패커를 구현했다. 
+앞뒤로 40바이트의 더미 코드(NOP)를 삽입한 후 `zlib`을 이용해 코드를 압축하고, `base64` 인코딩하는 방식으로 패커를 구현했다. 
+또한 일단은 `.text` 섹션만 패킹하도록 했다. 
 
 실행했던 로그: 
 ```
@@ -45,3 +46,23 @@
 ```
 
 (경로 앞부분만 삭제했다) 
+
+## 2. 언패커 구현
+
+일단은 패킹했던 `.text` 섹션을 언패킹하는 코드를 `unpacker.py`로 작성하고, 이를 사용해서 `restored_code.bin`을 생성했다.
+
+실행 로그: 
+```
+[Running] python -u "EVISION_8th\week_3\unpacker.py"
+[*] Unpacker started.
+[+] Packed data loaded from: EVISION_8th\week_3/packed.dat
+[+] Code decoded from Base64. Decoded size: 3615 bytes
+[+] Code decompressed. Decompressed size: 6224 bytes
+[+] Dummy code removed. Restored size: 6144 bytes
+[+] Restored code saved to: EVISION_8th\week_3/restored_code.bin
+
+[Done] exited with code=0 in 0.074 seconds
+```
+
+`Restored size`가 기존에 로드했던 `.text` 섹션과 일치함을 알 수 있다. 
+
