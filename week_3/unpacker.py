@@ -10,9 +10,58 @@ RESTORED_FILE = '/restored_code.bin'  # 복원된 코드를 저장할 파일
 DUMMY_SIZE = 40  # 삽입된 더미 코드 크기
 # ----------
 
+# -- 디버거 탐지 함수 --
+import ctypes
+
+def check_debugger():
+    try:
+        kernel32 = ctypes.windll.kernel32
+
+        if kernel32.IsDebuggerPresent():
+            return True
+        return False
+    except Exception as e:
+        print(f"[!] Debugger detection error: {e}")
+        return False
+
+# -- vm 탐지 함수 --
+
+import uuid
+
+VM_MAC_PREFIXES = [
+    "00:05:69",  # VMware
+    "00:0C:29",  # VMware
+    "00:1C:14",  # VMware
+    "00:50:56",  # VMware
+    "08:00:27",  # VirtualBox
+    "0A:00:27",  # VirtualBox
+    "00:15:5D",  # Hyper-V
+    "00:03:FF",  # Microsoft Virtual PC
+]
+
+def check_vm():
+    try:
+        mac_int = uuid.getnode()
+        mac_str = ':'.join(['{:02x}'.format((mac_int >> ele) & 0xff) for ele in range(0,8*6,8)][::-1])
+
+        for prefix in VM_MAC_PREFIXES:
+            if mac_str.upper().startswith(prefix):
+                return True
+        return False
+    except Exception as e:
+        print(f"[!] VM detection error: {e}")
+        return False
+
+
 print("[*] Unpacker started.")
 
 try:
+    # 디버거 / 가상머신 탐지
+    if check_debugger():
+        raise Exception("[-] Debugger detected! Exiting unpacker.")
+    if check_vm():
+        raise Exception("[-] Virtual Machine detected! Exiting unpacker.")
+
     # 1. 패킹된 데이터 파일 읽기
     with open(NOW_DIR + PACKED_FILE, 'rb') as f:
         json_bytes = f.read()
@@ -76,4 +125,4 @@ except FileNotFoundError:
     print(f"[-] FileNotFoundError: '{PACKED_FILE}' not found.")
 
 except Exception as e:
-    print(f"[-] Exception: {e}")
+    print(f"{e}")

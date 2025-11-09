@@ -404,3 +404,17 @@
 [Done] exited with code=0 in 0.077 seconds
 ```
 
+## 4. VM 탐지 / 디버거 탐지 추가 (선택사항)
+
+unpacker.py.가 시작되는 곳에 해당 두 기법을 추가했다. 
+
+`Windows API`인 `IsDebuggerPresent()`를 호출하여 확인하는 `check_debugger()`와 MAC 주소를 확인하여 가상머신을 탐지하믄 `check_vm()`을 추가하고 
+
+```
+    if check_debugger():
+        raise Exception("[-] Debugger detected! Exiting unpacker.")
+    if check_vm():
+        raise Exception("[-] Virtual Machine detected! Exiting unpacker.")
+```
+
+`unpacker.py`의 `try`문 첫 부분에 추가하여 탐지를 수행하도록 했다. 
